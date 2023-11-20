@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -5,15 +7,9 @@ public class Main {
         // Press Opt+Enter with your caret at the highlighted text to see how
         // IntelliJ IDEA suggests fixing it.
         final int speed_of_light = 3000000;
-        System.out.println("speed of light is " + speed_of_light);
-        System.out.printf("Hello and welcome!");
-
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
+        Scanner keyb = new Scanner(System.in);
+        System.out.println("enter a value for n: ");
+        int n = keyb.nextInt();
+        System.out.println("multiplying n by 5, results in " + n * 5);
     }
 }
