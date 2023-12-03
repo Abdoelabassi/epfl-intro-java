@@ -1,3 +1,4 @@
+package week1;
 import java.util.Scanner;
 
 class Swap3 {
@@ -22,7 +23,11 @@ class Swap3 {
         /*******************************************
          * Completez le programme a partir d'ici.
          *******************************************/
-
+        int temp1 = c;
+        int temp2 = b;
+        b = a;
+        c = temp2;
+        a = temp1;
 
 
         /*******************************************
