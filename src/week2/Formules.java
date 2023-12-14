@@ -55,5 +55,7 @@ public class Formules {
             System.out.println("Expression 4: " + resultat);
         }
 
+        scanner.close();
+
     }
 }
