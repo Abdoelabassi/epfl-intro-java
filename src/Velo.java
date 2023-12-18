@@ -12,38 +12,55 @@ public class Velo {
         /*******************************************
          * Completez le programme a partir d'ici.
          *******************************************/
-        int n_heures = 0;
-        double prix_1 = 0.0;
-        double prix_2 = 0.0;
+        double prix = 0.0;
         if ((debut < 0 && debut > 24) || (fin < 0 && fin > 24)) {
             System.out.println("Les heures doivent Ãªtre comprises entre 0 et 24 !");
         }
-        else if (debut == fin) {
-            System.out.println("Bizarre, vous n'avez pas louÃ© votre vÃ©lo bien longtemps !");
+        else {
+            if (debut == fin)
+            {
+                System.out.println("Bizarre, vous n'avez pas loué votre vélo bien longtemps !");
+            }
+            else if (debut > fin)
+            {
+                System.out.println("Bizarre, le début de la location est après la fin ...");
+            } else if (debut >= 0 && fin <= 24) {
+                System.out.println("Vous avez loué votre vélo pendant");
+                if ((debut >= 0 && fin <= 7) || (debut >= 17 && fin <= 24))
+                {
+                    System.out.println( fin - debut + " heure(s) au tarif horaire de 1.0 franc(s)");
+                    prix += (fin - debut);
+                }
+                else if (debut >= 17 && fin <= 24)
+                {
+                    System.out.println( fin - debut + " heure(s) au tarif horaire de 2.0 franc(s)");
+                    prix += 2 * (fin - debut);
+                }
+                else
+                {
+                    if ((debut >= 0 && debut <= 7) && (fin >= 7 && fin <= 17))
+                    {
+                        System.out.println(7 - debut + " heure(s) au tarif horaire de 1.0 franc(s)");
+                        prix += (7 - debut);
+                        System.out.println(fin - 7 + " heure(s) au tarif horaire de 2.0 franc(s)");
+                        prix += 2 * (fin - 7);
+                    }
+                    else if ((debut >= 7 && debut <= 17) && (fin >= 17 && fin <= 24)) {
+                        System.out.println( fin - 17 + " heure(s) au tarif horaire de 1.0 franc(s)");
+                        prix += (fin - 17);
+                        System.out.println(17 - debut + " heure(s) au tarif horaire de 2.0 franc(s)");
+                        prix += 2 * (17 - debut);
+                    }
+                    else if ((debut >= 0 && debut <= 7) && (fin >= 17 && fin <= 24)) {
+                        System.out.println((7 - debut) + (fin - 17) + " heure(s) au tarif horaire de 1.0 franc(s)");
+                        prix += (7 - debut) + (fin - 17);
+                        System.out.println("10 heure(s) au tarif horaire de 2.0 franc(s)");
+                        prix += 2 * 10;
+                    }
+                }
+            }
         }
-        else if (debut > fin) {
-            System.out.println("Bizarre, le dÃ©but de la location est aprÃ¨s la fin ...");
-        }
-        else if ((fin - debut > 0 && fin - debut < 7) || (fin - debut > 17 && fin - debut <= 24)) {
-            n_heures = fin - debut;
-            prix_1 = 1.0 * n_heures;
-
-            System.out.println("Vous avez loué votre vélo pendant ");
-            System.out.println( n_heures + " heure(s) au tarif horaire de " + prix_1 + " franc(s)");
-
-            System.out.print("Le montant total Ã  payer est de " + (fin - debut));
-            System.out.println(" franc(s).");
-        }
-        else if (fin - debut >= 7 && fin - debut < 17)
-        {
-            n_heures = fin - debut;
-            prix_2 = 2 * n_heures;
-            System.out.println("Vous avez louÃ© votre vÃ©lo pendant ");
-            System.out.println( n_heures + " heure(s) au tarif horaire de " + prix_2 + " franc(s)");
-        }
-        double prix_total = prix_1 + prix_2;
-        System.out.print("Le montant total Ã  payer est de " + prix_total);
-        System.out.println(" franc(s).");
+                    System.out.println("Le montant total à payer est de " +  prix + " franc(s)");
 
         /*******************************************
          * Ne rien modifier apres cette ligne.
