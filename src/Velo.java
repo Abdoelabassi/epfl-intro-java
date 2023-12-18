@@ -14,7 +14,7 @@ public class Velo {
          *******************************************/
         double prix = 0.0;
         if ((debut < 0 && debut > 24) || (fin < 0 && fin > 24)) {
-            System.out.println("Les heures doivent Ãªtre comprises entre 0 et 24 !");
+            System.out.println("Les heures doivent être comprises entre 0 et 24 !");
         }
         else {
             if (debut == fin)
