@@ -6,12 +6,13 @@ public class Velo {
         Scanner clavier = new Scanner(System.in);
         System.out.print("Donnez l’heure de début de la location (un entier) : ");
         int debut = clavier.nextInt();
-        System.out.print("Donnez l’heure de début de la location (un entier) : ");
+        System.out.print("Donnez l’heure de fin de la location (un entier) : ");
         int fin = clavier.nextInt();
 
         /*******************************************
          * Completez le programme a partir d'ici.
          *******************************************/
+
         double prix = 0.0;
         if ((debut < 0 && debut > 24) || (fin < 0 && fin > 24)) {
             System.out.println("Les heures doivent être comprises entre 0 et 24 !");
