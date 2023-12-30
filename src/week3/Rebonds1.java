@@ -17,17 +17,29 @@ public class Rebonds1 {
         do {
             System.out.print("Entrez l'hauteur initial (>= 0): ");
             hi = clavier.nextDouble();
+        }while(hi < 0);
+
+        do{
             System.out.print("Entrez le coefficient de rebond, constrainte 0 <= eps < 1: ");
             eps = clavier.nextDouble();
+        }while(eps < 0 || eps > 1);
+
+        do {
             System.out.print("Entrez le nombre de rebonds, contrainte: 0 <= NBR: ");
             nbr = clavier.nextInt();
-            v = Math.sqrt(2 * hi * g);
-            v1 = (eps * v) / nbr;
+        } while(nbr < 0);
+
+        double h = hi;
+        for (int i = 1; i <= nbr; i++)
+        {
+            v = Math.sqrt(2 * h * g);
+            v1 = eps * v;
             hf = Math.pow(v1,2)/(2*g);
-            System.out.println("l'hauteur apres " + nbr + " rebonds est " + hf);
-        } while((hi < 0) || (eps < 0 || eps > 1) || (nbr < 0));
+            h = hf;
+            System.out.println("rebond " + i + " l'hauteur : " +  h);
+        }
 
 
-
+        clavier.close();
     }
 }
