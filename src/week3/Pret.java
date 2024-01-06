@@ -6,19 +6,20 @@ public class Pret {
     {
         Scanner clavier = new Scanner(System.in);
 
-        double S = 0.0;
-        double r = 0.0;
-        double ir = 0.01;
+        double S = 0.0; // montant totale
+        double r = 0.0; // montant fix a paye
+        double ir = 0.01; // taux d'interet
+        int nbr = 0; // nombre de reboursements
 
         do{
             System.out.print("Entrez la somme total: ");
             S = clavier.nextDouble();
-        }while(S < 0);
+        }while(S <= 0);
 
         do{
-            System.out.print("Entrez le montant par mois: ");
+            System.out.print("Entrez le montant fixe a rembourser chaque mois: ");
             r = clavier.nextDouble();
-        }while(r < 0);
+        }while(r <= 0);
 
         do{
             System.out.print("Entrez le taux d'interet: ");
@@ -26,13 +27,17 @@ public class Pret {
         }while(ir < 0 || ir > 1);
 
         double somme = S;
+        double somme_interet = 0.0;
 
-        for (int i = 1; i <= 30; i++)
+        while (somme > 0)
         {
-            somme += r;
+            nbr++;
+            somme_interet += ir * somme;
+            somme -= r;
+            System.out.println(nbr + ": somme= " + somme + " somme d'interet=" + somme_interet);
         }
 
-        System.out.println("La somme des interets encaisses: " + somme);
+        System.out.println(" Somme des interets encaisses: " + somme_interet + " euros " + " (sur " + nbr + " mois). ");
         clavier.close();
 
     }
