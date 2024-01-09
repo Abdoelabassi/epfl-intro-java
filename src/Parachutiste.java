@@ -31,11 +31,26 @@ class Parachutiste {
         double a = g;
         double t = t_0;
         //System.out.printf("%.0f, %.4f, %.4f, %.5f\n", t, hauteur, v, a);
+        boolean is_supersonic = true;
+        boolean is_max_v = true;
+        boolean open_parachute = true;
         while(hauteur > 0)
         {
-            boolean is_supersonic = true;
-            boolean is_max_v = true;
-            boolean open_parachute = true;
+            double q = Math.exp(-s*(t-t_0));
+            v = (1-q)*g/s + v_0*q;
+            hauteur = h0 - g/s*(t-t_0) - (1-q)*(v_0 - g/s)/s;
+            a = g - s*v;
+            if (hauteur < 2500 && open_parachute)
+            {
+                open_parachute = false;
+                System.out.println("## Felix ouvre son parachute");
+                surface_parachutiste = 25.0;
+                s = surface_parachutiste / masse;
+                t_0 = t;
+                v_0 = v;
+                h0 = hauteur;
+            }
+
             if (v > 343 && is_supersonic){
                 is_supersonic = false;
                 System.out.println("## Felix depasse la vitesse du son");
@@ -44,11 +59,8 @@ class Parachutiste {
                 is_max_v = false;
                 System.out.println("## Felix a atteint sa vitesse maximale");
             }
+
             System.out.printf("%.0f, %.4f, %.4f, %.5f\n", t, hauteur, v, a);
-            double q = Math.exp(-s*(t-t_0));
-            v = (1-q)*g/s + v_0*q;
-            hauteur = h0 - g/s*(t-t_0) - (1-q)*(v_0 - g/s)/s;
-            a = g - s*v;
             t++;
         }
         /*******************************************
