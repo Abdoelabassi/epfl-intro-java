@@ -22,46 +22,49 @@ class Parachutiste {
          * Completez le programme a partir d'ici.
          *******************************************/
         double g = 9.81;
-        double v_0 = 0.0;
-        double t_0 = 0.0;
+        double v0 = 0.0;
+        double t0 = 0.0;
         double  surface_parachutiste = 2.0;
         double s = surface_parachutiste / masse;
         double hauteur = h0;
-        double v = v_0;
-        double a = g;
-        double t = t_0;
+        double vitesse = v0;
+        double accel = g;
+        double t = t0;
         //System.out.printf("%.0f, %.4f, %.4f, %.5f\n", t, hauteur, v, a);
         boolean is_supersonic = true;
         boolean is_max_v = true;
         boolean open_parachute = true;
-        while(hauteur > 0)
+        double q = 0.0;
+        while (hauteur > 0)
         {
-            double q = Math.exp(-s*(t-t_0));
-            v = (1-q)*g/s + v_0*q;
-            hauteur = h0 - g/s*(t-t_0) - (1-q)*(v_0 - g/s)/s;
-            a = g - s*v;
+            q = Math.exp(-s*(t-t0));
+            vitesse = (1-q)*g/s + v0*q;
+            hauteur = h0 - g/s*(t-t0) - (1-q)*(v0 - g/s)/s;
+            accel = g - s*vitesse;
+
+            if (vitesse > 343 && is_supersonic){
+                System.out.println("## Felix depasse la vitesse du son");
+                is_supersonic = false;
+            }
+            if (accel < 0.5 && is_max_v){
+                System.out.println("## Felix a atteint sa vitesse maximale");
+                is_max_v = false;
+            }
             if (hauteur < 2500 && open_parachute)
             {
-                open_parachute = false;
                 System.out.println("## Felix ouvre son parachute");
+                open_parachute = false;
                 surface_parachutiste = 25.0;
                 s = surface_parachutiste / masse;
-                t_0 = t;
-                v_0 = v;
+                t0 = t;
+                v0 = vitesse;
                 h0 = hauteur;
             }
-
-            if (v > 343 && is_supersonic){
-                is_supersonic = false;
-                System.out.println("## Felix depasse la vitesse du son");
-            }
-            else if (a < 0.5 && is_max_v){
-                is_max_v = false;
-                System.out.println("## Felix a atteint sa vitesse maximale");
-            }
-
-            System.out.printf("%.0f, %.4f, %.4f, %.5f\n", t, hauteur, v, a);
+            if (hauteur < 0)
+                break;
+            System.out.printf("%.0f, %.4f, %.4f, %.5f\n", t, hauteur, vitesse, accel);
             t++;
+
         }
         /*******************************************
          * Ne rien modifier apres cette ligne.
