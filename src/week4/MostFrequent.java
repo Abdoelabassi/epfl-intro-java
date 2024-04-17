@@ -1,3 +1,5 @@
+package week4;
+
 class MostFrequent {
 
     public static void main(String[] args) {
