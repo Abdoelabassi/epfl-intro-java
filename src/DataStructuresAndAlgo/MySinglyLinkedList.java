@@ -34,6 +34,15 @@ public class MySinglyLinkedList {
         return length;
     }
 
+    public void Insert(int data){
+        ListNode newNode = new ListNode(data);
+        if(head == null){
+            head = newNode;
+        }
+        newNode.next = head;
+        head = newNode;
+    }
+
 
     public static void main(String[] args){
         MySinglyLinkedList list = new MySinglyLinkedList();
@@ -46,6 +55,8 @@ public class MySinglyLinkedList {
         second.next = third; // 1 --> 2 --> 3
         third.next = fourth; // 1 --> 2 --> 3 --> 10
 
+        list.Traverse();
+        list.Insert(7);
         list.Traverse();
         System.out.println("Length: " + list.Length());
 
