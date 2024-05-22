@@ -140,6 +140,20 @@ public class MySinglyLinkedList {
     }
 
     /**
+     * removes the loop insiee the list
+     * @param slowNode
+     */
+
+    public void removeLoop(ListNode slowNode){
+        ListNode tmp = head;
+        while(tmp.next != slowNode.next){
+            tmp = tmp.next;
+            slowNode = slowNode.next;
+        }
+        slowNode.next = null;
+    }
+
+    /**
      * gets the slow node of a loop is detected: Floyd cycle algorithm
      * @return slownode
      */
@@ -154,6 +168,18 @@ public class MySinglyLinkedList {
             }
         }
         return null;
+    }
+
+    public void removeLoopInLinkedList(){
+        ListNode fastNode = head;
+        ListNode slowNode = head;
+        while(fastNode != null && fastNode.next != null){
+            fastNode = fastNode.next.next;
+            slowNode = slowNode.next;
+            if(fastNode == slowNode){
+                removeLoop(slowNode);
+            }
+        }
     }
 
     /**
