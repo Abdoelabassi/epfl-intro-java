@@ -86,6 +86,29 @@ public class MySinglyLinkedList {
     }
 
     /**
+     * create a loop inside a singly linked list
+     */
+
+    public void createAloopLinkedList(){
+        ListNode first = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode fifth = new ListNode(5);
+        ListNode sixth = new ListNode(6);
+
+        // connect the list
+        head = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = sixth;
+        sixth.next = third;
+    }
+
+
+    /**
      * is the list contains a loop
      * @return true
      */
@@ -95,7 +118,7 @@ public class MySinglyLinkedList {
         while(fastNode != null && fastNode.next != null){
             fastNode = fastNode.next.next;
             slowNode = slowNode.next;
-            if(fastNode == slowNode){
+            if(slowNode == fastNode){
                 return true;
             }
         }
@@ -107,7 +130,7 @@ public class MySinglyLinkedList {
      * @param slownode
      * @return
      */
-    public ListNode getStartingNode(ListNode slownode){
+    private ListNode getStartingNode(ListNode slownode){
         ListNode tmp = head;
         while(tmp != slownode){
             tmp = tmp.next;
@@ -175,27 +198,13 @@ public class MySinglyLinkedList {
      */
     public static void main(String[] args){
         MySinglyLinkedList list = new MySinglyLinkedList();
-        list.head = new ListNode(1);
-        ListNode second = new ListNode(2);
-        ListNode third = new ListNode(3);
-        ListNode fourth = new ListNode(4);
-        ListNode fifth = new ListNode(5);
-        ListNode sixth = new ListNode(6);
+        list.createAloopLinkedList();
 
-        // connect the list
-        list.head.next = second;
-        second.next = third;
-        third.next = fourth;
-        fourth.next = fifth;
-        fifth.next = sixth;
-        sixth.next = third;
 
-        list.Traverse();
-        System.out.println("Length: " + list.Length());
-        if (list.containsLoop())
-        {
-            System.out.println("yes contains a loop");
-        }
+        //list.Traverse();
+        System.out.println("is it contains a loop: " + list.containsLoop());
+        System.out.println("The starting node in this loop, with the value data = " + list.getStartingNodeLoop().data);
+
 
     }
 
