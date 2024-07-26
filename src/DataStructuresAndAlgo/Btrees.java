@@ -36,4 +36,21 @@ public class Btrees<T> {
         third.right = seventh;
 
     }
+    // traverse a binary tree
+    public void preOrder(TreeNode<T> root) {
+
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    public static void main(String[] args) {
+        Btrees<Integer> bt = new Btrees<>();
+        bt.createBTree(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+        bt.preOrder(bt.root);
+
+    }
 }
